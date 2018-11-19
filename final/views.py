@@ -16,10 +16,10 @@ def pensum_new(request):
     if request.method == "POST":
         formulario = GradoForm(request.POST)
         if formulario.is_valid():
-            grado = Cancion.objects.create(nombre=formulario.cleaned_data['nombre'], seccion = formulario.cleaned_data['seccion'])
+            grado = Grado.objects.create(nombre=formulario.cleaned_data['nombre'], seccion = formulario.cleaned_data['seccion'])
             for Materia_id in request.POST.getlist('Materia'):
                 pensum = Pensum(Materia_id=Materia_id, Grado_id = grado.id)
-                participacion.save()
+                pensum.save() 
             return redirect('pensum_index')
     else:
         formulario = GradoForm()
